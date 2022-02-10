@@ -25,15 +25,16 @@ public class MatrixIt implements Iterator<Integer> {
 
     @Override
     public Integer next() {
+        int result;
         if (!hasNext()) {
             throw new NoSuchElementException();
         }
         if (column == data[row].length - 1) {
-            int currentColumn = column;
+            result = data[row++][column];
             column = 0;
-            return data[row++][currentColumn];
         } else {
-            return data[row][column++];
+            result = data[row][column++];
         }
+        return result;
     }
 }
