@@ -14,31 +14,26 @@ public class MatrixIt implements Iterator<Integer> {
 
     @Override
     public boolean hasNext() {
-        missEmptyRows();
+        /* miss empty rows*/
+        while (data[row].length == 0
+                && row < data.length - 1) {
+            row++;
+        }
         return row < data.length
                 && column < data[row].length;
     }
 
     @Override
     public Integer next() {
-        if (column == data[row].length - 1) {
-            row++;
-            column = 0;
-        } else {
-            column++;
-        }
-
         if (!hasNext()) {
             throw new NoSuchElementException();
         }
-        return data[row][column];
-    }
-
-    private void missEmptyRows() {
-        while (data[row].length == 0
-                && row < data.length - 1) {
-            row++;
+        if (column == data[row].length - 1) {
+            int currentColumn = column;
+            column = 0;
+            return data[row++][currentColumn];
+        } else {
+            return data[row][column++];
         }
     }
-
 }
