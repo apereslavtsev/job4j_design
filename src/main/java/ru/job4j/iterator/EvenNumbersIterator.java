@@ -13,25 +13,19 @@ public class EvenNumbersIterator implements Iterator<Integer> {
 
     @Override
     public boolean hasNext() {
-        return nextEvenPoint() >= 0;
+        for (point = point; point < data.length; point++) {
+            if (data[point] % 2 == 0) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
     public Integer next() {
-        int i = nextEvenPoint();
-        if (i < 0) {
+        if (!hasNext()) {
            throw new NoSuchElementException();
         }
-        point = i;
         return data[point++];
-    }
-
-    private int nextEvenPoint() {
-        for (var i = point; i < data.length; i++) {
-            if (data[i] % 2 == 0) {
-                return i;
-            }
-        }
-        return -1;
     }
 }
