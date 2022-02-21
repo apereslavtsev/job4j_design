@@ -56,8 +56,17 @@ public class SimpleArrayListTest {
     }
 
     @Test
+    public void whenRemoveThenMustNotBeEmpty4() {
+        list.add(4);
+        list.remove(2);
+        Assert.assertEquals(Integer.valueOf(1), list.get(0));
+        Assert.assertEquals(Integer.valueOf(4), list.get(2));
+    }
+
+
+    @Test
     public void whenAddNullThenMustBeSameBehavior() {
-        list = new SimpleArrayList<>(3);
+        list = new SimpleArrayList<>(1);
         list.add(null);
         list.add(null);
         Assert.assertEquals(2, list.size());
