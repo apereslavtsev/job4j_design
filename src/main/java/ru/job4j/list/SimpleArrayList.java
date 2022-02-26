@@ -1,10 +1,8 @@
 package ru.job4j.list;
 
-import ru.job4j.list.List;
-
 import java.util.*;
 
-public class SimpleArrayList<T> implements List<T> {
+public class SimpleArrayList<T> implements ListArray<T> {
 
     private T[] container;
 
