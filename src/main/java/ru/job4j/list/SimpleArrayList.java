@@ -23,7 +23,7 @@ public class SimpleArrayList<T> implements ListArray<T> {
 
     @Override
     public T set(int index, T newValue) {
-        T oldValue = checkedValue(index);
+        T oldValue = get(index);
         container[index] = newValue;
         modCount++;
         return oldValue;
@@ -31,7 +31,7 @@ public class SimpleArrayList<T> implements ListArray<T> {
 
     @Override
     public T remove(int index) {
-        T oldValue = checkedValue(index);
+        T oldValue = get(index);
         System.arraycopy(container, index + 1, container, index, container.length - index - 1);
         modCount++;
         size--;
@@ -41,7 +41,8 @@ public class SimpleArrayList<T> implements ListArray<T> {
 
     @Override
     public T get(int index) {
-       return checkedValue(index);
+        Objects.checkIndex(index, size);
+        return container[index];
     }
 
     @Override
@@ -72,11 +73,6 @@ public class SimpleArrayList<T> implements ListArray<T> {
             }
 
         };
-    }
-
-    private T checkedValue(int index) {
-        Objects.checkIndex(index, size);
-        return container[index];
     }
 
     private void checkArraySize() {
