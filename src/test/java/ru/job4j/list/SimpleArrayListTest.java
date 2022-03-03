@@ -39,7 +39,7 @@ public class SimpleArrayListTest {
     @Test
     public void whenRemoveThenGetValueAndSizeDecrease() {
         Assert.assertEquals(3, listArray.size());
-        Assert.assertEquals(Integer.valueOf(2), listArray.remove(1));
+        Assert.assertEquals(Integer.valueOf(1), listArray.remove(0));
         Assert.assertEquals(2, listArray.size());
     }
 
