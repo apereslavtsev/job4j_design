@@ -67,7 +67,8 @@ public class SimpleMap<K, V> implements Map<K, V> {
        V rsl = null;
        if (key != null) {
            MapEntry<K, V> point = table[indexFor(key)];
-           if (point != null) {
+           if (point != null
+                   && point.key.equals(key)) {
                rsl = point.value;
            }
        }
@@ -79,7 +80,8 @@ public class SimpleMap<K, V> implements Map<K, V> {
         boolean rsl = false;
         if (key != null) {
             int id = indexFor(key);
-            if (table[id] != null) {
+            if (table[id] != null
+                    && table[id].key.equals(key)) {
                 table[id] = null;
                 rsl = true;
                 count--;
