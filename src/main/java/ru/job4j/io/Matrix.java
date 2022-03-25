@@ -30,6 +30,6 @@ public class Matrix {
     }
 
     public static void main(String[] args) {
-        saveInFile(multiple(4), "test4");
+        saveInFile(multiple(4), "test4.txt");
     }
 }
