@@ -38,7 +38,8 @@ public class LogFilter {
             for (String line : log) {
                 out.println(line);
             }
-        } catch (Exception e) {
+        } catch (IOException e) {
+            System.out.println("Ошибка при чтении данных из файла!");
             e.printStackTrace();
         }
     }
