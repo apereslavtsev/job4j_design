@@ -16,15 +16,19 @@ public class Config {
     }
 
     public void load() {
+        int id = 0;
         for (String line : toString().split(System.lineSeparator())) {
+            id++;
             line = line.trim();
             if (!line.startsWith("#")
                     && line.length() != 0) {
-                String[] arg = line.split("=");
-                if (arg.length != 2
-                || arg[0].trim().length() == 0
-                || arg[1].trim().length() == 0) {
-                    throw new IllegalArgumentException();
+                String[] arg = line.split("=", 2);
+                if (arg.length != 2) {
+                    throw new IllegalArgumentException("Illegal key / value in line:" + id);
+                } else if (arg[0].trim().length() == 0) {
+                    throw new IllegalArgumentException("The key is missing in the line:" + id);
+                }  else if (arg[1].trim().length() == 0) {
+                    throw new IllegalArgumentException("The value is missing in the line:" + id);
                 }
                 values.put(arg[0].trim(), arg[1].trim());
             }
