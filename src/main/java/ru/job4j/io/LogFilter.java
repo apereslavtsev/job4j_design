@@ -26,8 +26,6 @@ public class LogFilter {
         } catch (IOException e) {
             System.out.println("Ошибка при чтении данных из файла!");
             e.printStackTrace();
-        } catch (Exception e) {
-            e.printStackTrace();
         }
         return rsl;
     }
