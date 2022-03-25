@@ -23,6 +23,9 @@ public class LogFilter {
                         }
                     })
                     .collect(Collectors.toList());
+        } catch (IOException e) {
+            System.out.println("Ошибка при чтении данных из файла!");
+            e.printStackTrace();
         } catch (Exception e) {
             e.printStackTrace();
         }
