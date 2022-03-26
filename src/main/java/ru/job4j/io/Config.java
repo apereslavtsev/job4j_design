@@ -23,15 +23,19 @@ public class Config {
             if (!line.startsWith("#")
                     && line.length() != 0) {
                 String[] arg = line.split("=", 2);
-                if (arg.length != 2) {
-                    throw new IllegalArgumentException("Illegal key / value in line:" + id);
-                } else if (arg[0].trim().length() == 0) {
-                    throw new IllegalArgumentException("The key is missing in the line:" + id);
-                }  else if (arg[1].trim().length() == 0) {
-                    throw new IllegalArgumentException("The value is missing in the line:" + id);
-                }
+                checkKeyValue(id, arg);
                 values.put(arg[0].trim(), arg[1].trim());
             }
+        }
+    }
+
+    private void checkKeyValue(int id, String[] arg) {
+        if (arg.length != 2) {
+            throw new IllegalArgumentException("Illegal key / value in line:" + id);
+        } else if (arg[0].trim().length() == 0) {
+            throw new IllegalArgumentException("The key is missing in the line:" + id);
+        }  else if (arg[1].trim().length() == 0) {
+            throw new IllegalArgumentException("The value is missing in the line:" + id);
         }
     }
 
