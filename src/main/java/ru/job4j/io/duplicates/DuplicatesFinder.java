@@ -11,5 +11,6 @@ public class DuplicatesFinder {
         DuplicatesVisitor duplicates = new DuplicatesVisitor();
         Files.walkFileTree(start, duplicates);
         duplicates.getDuplicatesList().forEach(System.out::println);
+        System.out.println("end");
     }
 }
