@@ -1,7 +1,7 @@
 package ru.job4j.io;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.regex.Pattern;
+
 
 public class ArgsName {
 
@@ -24,9 +24,8 @@ public class ArgsName {
             if (args[i].matches("-(.+)=(.+)")) {
                 values.put(arg[0].trim().substring(1),
                         arg[1].trim());
-            }
-            else {
-                ShowArgumentException(i, arg);
+            } else {
+                showArgumentException(i, arg);
             }
         }
     }
@@ -37,7 +36,7 @@ public class ArgsName {
         return names;
     }
 
-    private void ShowArgumentException(int id, String[] arg) {
+    private void showArgumentException(int id, String[] arg) {
         String exceptionText;
         if (arg.length != 2) {
             exceptionText = "Illegal key / value in line:" + id;
