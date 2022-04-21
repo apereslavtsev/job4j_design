@@ -31,6 +31,12 @@ public class ArgsNameTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
+    public void whenGa() {
+        ArgsName jvm = ArgsName.of(new String[] {"-Xmx=512"});
+        jvm.get("Xms");
+    }
+
+    @Test(expected = IllegalArgumentException.class)
     public void whenWrongSomeArgument() {
         ArgsName jvm = ArgsName.of(new String[] {"-enconding=UTF-8", "-Xmx="});
     }
