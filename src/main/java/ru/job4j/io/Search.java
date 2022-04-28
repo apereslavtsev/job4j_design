@@ -13,23 +13,22 @@ public class Search {
         if (args.length != 2) {
             throw new IllegalArgumentException("2 arguments are expected");
         }
-        if (argsValid(args)) {
+        if (argsValid(args[0], args[1])) {
             Path start = Paths.get(args[0]);
             search(start, p -> p.toFile().getName().endsWith(args[1])).forEach(System.out::println);
         }
     }
 
-    private static boolean argsValid(String[] args) {
+    public static boolean argsValid(String catalog, String fileExtension) {
         StringBuilder exceptionText = new StringBuilder();
-        if (args[0].length() == 0
-            || !new File(args[0]).exists()) {
+        if (!new File(catalog).exists()) {
 
-            exceptionText.append("Wrong catalog in first argument: " + args[0])
+            exceptionText.append("The specified directory does not exist: ")
+                    .append(catalog)
                     .append(System.lineSeparator());
         }
-        if (args[1].length() == 0
-                || args[1].charAt(0) != '.') {
-            exceptionText.append("Second argument must start with a symbol: '.'");
+        if (fileExtension.charAt(0) != '.') {
+            exceptionText.append("File extension must start with a symbol: '.'");
         }
         if (!exceptionText.isEmpty()) {
             throw new IllegalArgumentException(exceptionText.toString());
