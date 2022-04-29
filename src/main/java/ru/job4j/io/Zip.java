@@ -22,15 +22,14 @@ public class Zip {
             e.printStackTrace();
         }
     }
-    public void packSingleFile(File source, File target) {
-        try (ZipOutputStream zip = new ZipOutputStream(new BufferedOutputStream(new FileOutputStream(target)))) {
-            zip.putNextEntry(new ZipEntry(source.getPath()));
-            try (BufferedInputStream out = new BufferedInputStream(new FileInputStream(source))) {
-                zip.write(out.readAllBytes());
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+    private static ArgsName validArgs(String[] args) {
+        ArgsName arguments = ArgsName.of(args);
+        Search.argsValid(arguments.get("d"), arguments.get("e"));
+        File target = new File(arguments.get("o"));
+        if (!new File(new File(target.getAbsolutePath()).getParent()).exists()) {
+            throw new IllegalArgumentException("Wrong target catalog!");
         }
+        return arguments;
     }
     public static void main(String[] args) throws IOException {
         ArgsName arguments = validArgs(args);
@@ -42,14 +41,5 @@ public class Zip {
         Zip zip = new Zip();
         zip.packFiles(fileList,
                 new File(arguments.get("o")));
-    }
-    private static ArgsName validArgs(String[] args) {
-        ArgsName arguments = ArgsName.of(args);
-        Search.argsValid(arguments.get("d"), arguments.get("e"));
-        File target = new File(arguments.get("o"));
-        if (!new File(new File(target.getAbsolutePath()).getParent()).exists()) {
-            throw new IllegalArgumentException("Wrong target catalog!");
-        }
-        return arguments;
     }
 }
