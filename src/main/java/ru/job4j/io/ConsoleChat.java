@@ -4,7 +4,8 @@ import java.io.*;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Predicate;
+import java.util.Random;
+import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public class ConsoleChat {
@@ -19,17 +20,23 @@ public class ConsoleChat {
     public ConsoleChat(String path, String botAnswers) {
         this.path = path;
         this.botAnswers = botAnswers;
+        checkArgs();
     }
 
-    public void run() {
-       // while ( )
-
-
+    private void checkArgs() {
+        if (!new File(new File(new File(path).getAbsolutePath()).getParent()).exists()) {
+            throw new IllegalArgumentException("Wrong target catalog!");
+        }
+        if (!new File(this.botAnswers).exists()) {
+            throw new IllegalArgumentException("Wrong filename with answers!");
+        }
     }
 
     private void saveLog() {
-        try (PrintWriter pw = new PrintWriter(new FileWriter(path, Charset.forName("WINDOWS-1251"), true))) {
+        try (PrintWriter pw = new PrintWriter(
+                new FileWriter(path, Charset.forName("WINDOWS-1251"), true))) {
             logList.forEach(pw::println);
+            logList.clear();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -37,7 +44,7 @@ public class ConsoleChat {
 
     private List<String> readPhrases() {
         List<String> rsl = new ArrayList<>();
-        try (BufferedReader in = new BufferedReader(new FileReader(botAnswers))) {
+        try (BufferedReader in = new BufferedReader(new FileReader(botAnswers, Charset.forName("WINDOWS-1251")))) {
             rsl = in.lines()
                     .collect(Collectors.toList());
         } catch (IOException e) {
@@ -47,19 +54,35 @@ public class ConsoleChat {
         return rsl;
     }
 
-    private static ArgsName validArgs(String[] args) {
-        ArgsName arguments = ArgsName.of(args);
-        if (!new File(new File(new File(arguments.get("a")).getAbsolutePath()).getParent()).exists()) {
-            throw new IllegalArgumentException("Wrong target catalog!");
+    public void run() {
+        String userQuestion = "";
+        Scanner scanner = new Scanner(System.in);
+        List<String> phrases = readPhrases();
+        Random random = new Random();
+        boolean stopMode = false;
+
+        while (!OUT.equals(userQuestion)) {
+            if (!stopMode) {
+                String botAnswer = phrases.get(random.nextInt(phrases.size()));
+                logList.add(botAnswer);
+                System.out.println(botAnswer);
+            }
+            userQuestion = scanner.nextLine();
+            logList.add(userQuestion);
+            if (!stopMode
+                    && STOP.equals(userQuestion)) {
+                stopMode = true;
+                saveLog();
+            } else if (CONTINUE.equals(userQuestion)) {
+                stopMode = false;
+                saveLog();
+            }
         }
-        if (!new File(arguments.get("a")).exists()) {
-            throw new IllegalArgumentException("Wrong filename with answers!");
-        }
-        return arguments;
+        saveLog();
     }
 
     public static void main(String[] args) {
-        ArgsName arguments = validArgs(args);
+        ArgsName arguments = ArgsName.of(args);
         ConsoleChat cc = new ConsoleChat(arguments.get("l"), arguments.get("a"));
         cc.run();
     }
