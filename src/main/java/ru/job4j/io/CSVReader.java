@@ -1,6 +1,14 @@
 package ru.job4j.io;
 
 import java.io.*;
+import java.lang.reflect.Array;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 public class CSVReader {
@@ -24,18 +32,30 @@ public class CSVReader {
     }
 
     public static void handle(ArgsName arguments) throws Exception {
+        String ls = System.lineSeparator();
         Scanner scanner = new Scanner(new File(arguments.get("path")))
-                .useDelimiter(System.lineSeparator());
+                .useDelimiter(ls + "|;");
+        StringBuilder text = new StringBuilder();
 
-             while (scanner.hasNext()) {
-                 String line = scanner.next();
+        List<String> filter     = Arrays.asList(arguments.get("filter").split(","));
+        List<String> fileColumns = Arrays.asList(scanner.nextLine().split(";"));
+
+        scanner.locale();
+        int i = 0;
+        while (scanner.hasNext()) {
+            String value = scanner.next();
+            if (filter.contains(fileColumns.get(i++))) {
+                text.append(value)
+                        .append(";");
             }
-
-            /*while (scanner.hasNext()) {
-                System.out.print(scanner.nextInt());
-                System.out.print(" ");
-            }*/
-
+            if (i == fileColumns.size()) {
+                i = 0;
+                text.deleteCharAt(text.length() - 1);
+                text.append(ls);
+            }
+        }
+        Files.writeString(Paths.get(arguments.get("out")),
+                text.toString(), StandardCharsets.UTF_8);
     }
 
     public static void main(String[] args) throws Exception {
