@@ -1,12 +1,9 @@
 package ru.job4j.io;
 
 import java.io.*;
-import java.lang.reflect.Array;
-import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -30,7 +27,6 @@ public class CSVReader {
         }
         return exceptionText.isEmpty();
     }
-
     public static void handle(ArgsName arguments) throws Exception {
         String ls = System.lineSeparator();
         Scanner scanner = new Scanner(new File(arguments.get("path")))
@@ -40,7 +36,12 @@ public class CSVReader {
         List<String> filter     = Arrays.asList(arguments.get("filter").split(","));
         List<String> fileColumns = Arrays.asList(scanner.nextLine().split(";"));
 
-        scanner.locale();
+        fileColumns.stream()
+                .filter(filter::contains)
+                .forEach(c -> text.append(c).append(";"));
+        text.deleteCharAt(text.length() - 1);
+        text.append(ls);
+
         int i = 0;
         while (scanner.hasNext()) {
             String value = scanner.next();
@@ -57,7 +58,6 @@ public class CSVReader {
         Files.writeString(Paths.get(arguments.get("out")),
                 text.toString(), StandardCharsets.UTF_8);
     }
-
     public static void main(String[] args) throws Exception {
         ArgsName arguments = ArgsName.of(args);
         if (argsValid(arguments)) {
