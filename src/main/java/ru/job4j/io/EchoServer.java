@@ -16,8 +16,16 @@ public class EchoServer {
                     out.write("HTTP/1.1 200 OK\r\n\r\n".getBytes());
                     for (String str = in.readLine(); str != null && !str.isEmpty(); str = in.readLine()) {
                         System.out.println(str);
-                        if (str.contains("msg=Bye")) {
-                            closeRequestReceived = true;
+                        if (str.matches("(.+)msg=(.+)")) {
+                            String msg = str.split("=")[1].split("HTTP")[0].trim();
+                            if ("Hello".equals(msg)) {
+                                out.write("Hello, my dear friend!".getBytes());
+                            } else if ("Exit".equals(msg)) {
+                                out.write("Bye bye!".getBytes());
+                                closeRequestReceived = true;
+                            } else {
+                                out.write("What".getBytes());
+                            }
                         }
                     }
                     out.flush();
