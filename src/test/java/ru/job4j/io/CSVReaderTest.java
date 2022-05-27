@@ -67,6 +67,7 @@ public class CSVReaderTest {
         CSVReader.handle(argsName);
         Assert.assertEquals(expected, Files.readString(target.toPath(), StandardCharsets.UTF_8));
     }
+
     @Test
     public void whenFilterTwoColumnsAndStdout() throws Exception {
         String data = String.join(
