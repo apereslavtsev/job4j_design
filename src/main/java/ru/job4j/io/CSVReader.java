@@ -55,8 +55,12 @@ public class CSVReader {
                 text.append(ls);
             }
         }
-        Files.writeString(Paths.get(arguments.get("out")),
-                text.toString(), StandardCharsets.UTF_8);
+        if ("stdout".equals(arguments.get("out"))) {
+            System.out.print(text);
+        } else {
+            Files.writeString(Paths.get(arguments.get("out")),
+                    text.toString(), StandardCharsets.UTF_8);
+        }
     }
     public static void main(String[] args) throws Exception {
         ArgsName arguments = ArgsName.of(args);
