@@ -13,7 +13,6 @@ import java.nio.file.Files;
 import java.util.Scanner;
 
 public class CSVReaderTest {
-
     @Rule
     public TemporaryFolder temporaryFolder = new TemporaryFolder();
 
