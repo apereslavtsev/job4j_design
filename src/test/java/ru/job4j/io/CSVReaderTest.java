@@ -79,7 +79,7 @@ public class CSVReaderTest {
         );
         File file = temporaryFolder.newFile("source.csv");
         ArgsName argsName = ArgsName.of(new String[]{
-                "-path=" + file.getAbsolutePath(), "-delimiter=;", "-out=stdout" , "-filter=name,age"
+                "-path=" + file.getAbsolutePath(), "-delimiter=;", "-out=stdout", "-filter=name,age"
         });
         Files.writeString(file.toPath(), data, StandardCharsets.UTF_8);
         String expected = String.join(
