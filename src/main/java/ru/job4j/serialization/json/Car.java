@@ -54,7 +54,7 @@ public class Car {
                             + "\"driver\":{\"sex\":true,"
                                             + "\"age\":22,"
                                             + "\"contact\":{\"zipCode\":1,"
-                                            + "\"phone\":\"22-55-48\"},"
+                                                            + "\"phone\":\"22-55-48\"},"
                                             + "\"statuses\":[\"Driver\",\"Mechanic\"]"
                                             + "}"
                             + "}";
