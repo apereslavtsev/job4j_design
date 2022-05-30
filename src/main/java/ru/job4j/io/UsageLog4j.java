@@ -10,14 +10,15 @@ public class UsageLog4j {
     public static void main(String[] args) {
         String name = "Petr Arsentev";
         byte age = 33;
+        short chilldCount = 2;
         int height = 175;
         boolean isMale = true;
         float nalog = 4834.44f;
         double weight = 75.4463874;
         char houseBuilding = 'a';
         long salary = 1234567895;
-        LOG.debug("User info name : {}, age : {}, height : {}, "
+        LOG.debug("User info name : {}, age : {}, child count : {},  height : {}, "
                 + "is male : {}, nalog : {}, weight : {}, building : {}, salary : {}",
-                name, age, height, isMale, nalog, weight, houseBuilding, salary);
+                name, age, chilldCount, height, isMale, nalog, weight, houseBuilding, salary);
     }
 }
