@@ -1,0 +1,17 @@
+<?xml version="1.1" encoding="UTF-8" ?>
+<car regNumber="254" automaticTransmission="false">
+    <name>VAZ 2107</name>
+    <radiuses>
+        <radius>13</radius>
+        <radius>13</radius>
+        <radius>14</radius>
+        <radius>14</radius>
+    </radiuses>
+    <driver sex="true" age="22">
+        <contact phone="22-55-48"/>
+        <statuses>
+            <status>Driver</status>
+            <status>Mechanic</status>
+        </statuses>
+    </driver>
+</car>
