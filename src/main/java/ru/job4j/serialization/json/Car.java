@@ -2,6 +2,8 @@ package ru.job4j.serialization.json;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import org.json.JSONObject;
+import org.json.JSONPropertyIgnore;
 
 import javax.xml.bind.*;
 import java.io.StringReader;
@@ -21,22 +23,77 @@ public class Car {
     String name;
     @XmlAttribute
     boolean automaticTransmission;
-
     @XmlElementWrapper(name = "radiuses")
     @XmlElement(name = "radius")
     String[] wheelRadius;
     Person driver;
+    Car replacementCar;
 
     public Car() {
 
     }
 
-    public Car(int regNumber, String name, boolean automaticTransmission, Person driver, String... wheelRadius) {
+    public Car(int regNumber, String name) {
+        this.regNumber = regNumber;
+        this.name = name;
+    }
+
+    public Car(int regNumber, String name, boolean automaticTransmission, Person driver, Car replacementCar, String... wheelRadius) {
         this.regNumber = regNumber;
         this.name = name;
         this.automaticTransmission = automaticTransmission;
         this.wheelRadius = wheelRadius;
         this.driver = driver;
+        this.replacementCar = replacementCar;
+    }
+
+    public int getRegNumber() {
+        return regNumber;
+    }
+
+    public void setRegNumber(int regNumber) {
+        this.regNumber = regNumber;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public boolean isAutomaticTransmission() {
+        return automaticTransmission;
+    }
+
+    public void setAutomaticTransmission(boolean automaticTransmission) {
+        this.automaticTransmission = automaticTransmission;
+    }
+
+    public String[] getWheelRadius() {
+        return wheelRadius;
+    }
+
+    public void setWheelRadius(String[] wheelRadius) {
+        this.wheelRadius = wheelRadius;
+    }
+
+    public Person getDriver() {
+        return driver;
+    }
+
+    public void setDriver(Person driver) {
+        this.driver = driver;
+    }
+
+    @JSONPropertyIgnore
+    public Car getReplacementCar() {
+        return replacementCar;
+    }
+
+    public void setReplacementCar(Car replacementCar) {
+        this.replacementCar = replacementCar;
     }
 
     @Override
@@ -93,8 +150,15 @@ public class Car {
 
     }
 
+    private static void toJsonObj(Car car) {
+        JSONObject jsonObject = new JSONObject(car);
+        jsonObject.put("replacementCar", new JSONObject(car.getReplacementCar()));
+        System.out.println(jsonObject.toString());
+    }
+
     public static void main(String[] args) throws Exception {
-        Car car = new Car(
+        Car car09 = new Car(855, "VAZ 2109");
+        Car car07 = new Car(
                 254,
                 "VAZ 2107",
                 false,
@@ -103,8 +167,12 @@ public class Car {
                         22,
                         new Contact("22-55-48"),
                         new String[]{"Driver", "Mechanic"}),
+                car09,
                 "13", "13", "14", "14");
-        toJSON(car);
-        toXML(car);
+
+        car09.setReplacementCar(car07);
+        toJsonObj(car07);
+        toJSON(car07);
+        toXML(car07);
     }
 }
