@@ -16,7 +16,7 @@ import java.io.StringWriter;
 import java.util.Arrays;
 
 @XmlRootElement(name = "car")
-@XmlAccessorType(XmlAccessType.FIELD)
+@XmlAccessorType(XmlAccessType.NONE)
 public class Car {
     @XmlAttribute
     int regNumber;
@@ -28,7 +28,6 @@ public class Car {
     String[] wheelRadius;
     Person driver;
     Car replacementCar;
-
     public Car() {
 
     }
@@ -109,6 +108,7 @@ public class Car {
 
     private static void toJSON(Car car) {
         final Gson gson = new GsonBuilder().create();
+
         System.out.println(gson.toJson(car));
 
         String car1Text = "{"
@@ -171,8 +171,8 @@ public class Car {
                 "13", "13", "14", "14");
 
         car09.setReplacementCar(car07);
-        toJsonObj(car07);
+        /*toJsonObj(car07);*/
         toJSON(car07);
-        toXML(car07);
+        /*toXML(car07);*/
     }
 }

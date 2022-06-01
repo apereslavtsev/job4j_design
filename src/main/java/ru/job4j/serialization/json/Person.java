@@ -7,7 +7,7 @@ import java.io.StringWriter;
 import java.util.Arrays;
 
 @XmlRootElement(name = "person")
-@XmlAccessorType(XmlAccessType.FIELD)
+@XmlAccessorType(XmlAccessType.NONE)
 public class Person {
     @XmlAttribute
     private boolean sex;
