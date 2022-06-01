@@ -1,9 +1,12 @@
 package ru.job4j.serialization.json;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.*;
 import java.nio.file.Files;
 @XmlRootElement(name = "contact")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Contact implements Serializable {
     private static final long serialVersionUID = 1L;
     @XmlAttribute

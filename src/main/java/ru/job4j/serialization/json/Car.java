@@ -16,7 +16,7 @@ import java.io.StringWriter;
 import java.util.Arrays;
 
 @XmlRootElement(name = "car")
-@XmlAccessorType(XmlAccessType.NONE)
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Car {
     @XmlAttribute
     int regNumber;
@@ -27,7 +27,6 @@ public class Car {
     @XmlElement(name = "radius")
     String[] wheelRadius;
     Person driver;
-    Car replacementCar;
     public Car() {
 
     }
@@ -37,13 +36,12 @@ public class Car {
         this.name = name;
     }
 
-    public Car(int regNumber, String name, boolean automaticTransmission, Person driver, Car replacementCar, String... wheelRadius) {
+    public Car(int regNumber, String name, boolean automaticTransmission, Person driver, String... wheelRadius) {
         this.regNumber = regNumber;
         this.name = name;
         this.automaticTransmission = automaticTransmission;
         this.wheelRadius = wheelRadius;
         this.driver = driver;
-        this.replacementCar = replacementCar;
     }
 
     public int getRegNumber() {
@@ -84,15 +82,6 @@ public class Car {
 
     public void setDriver(Person driver) {
         this.driver = driver;
-    }
-
-    @JSONPropertyIgnore
-    public Car getReplacementCar() {
-        return replacementCar;
-    }
-
-    public void setReplacementCar(Car replacementCar) {
-        this.replacementCar = replacementCar;
     }
 
     @Override
@@ -152,12 +141,10 @@ public class Car {
 
     private static void toJsonObj(Car car) {
         JSONObject jsonObject = new JSONObject(car);
-        jsonObject.put("replacementCar", new JSONObject(car.getReplacementCar()));
         System.out.println(jsonObject.toString());
     }
 
     public static void main(String[] args) throws Exception {
-        Car car09 = new Car(855, "VAZ 2109");
         Car car07 = new Car(
                 254,
                 "VAZ 2107",
@@ -166,13 +153,12 @@ public class Car {
                         true,
                         22,
                         new Contact("22-55-48"),
-                        new String[]{"Driver", "Mechanic"}),
-                car09,
+                        "Driver", "Mechanic"),
                 "13", "13", "14", "14");
 
-        car09.setReplacementCar(car07);
-        /*toJsonObj(car07);*/
+
+        toJsonObj(car07);
         toJSON(car07);
-        /*toXML(car07);*/
+        toXML(car07);
     }
 }
