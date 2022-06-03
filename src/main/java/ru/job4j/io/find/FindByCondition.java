@@ -57,7 +57,8 @@ public class FindByCondition {
         }
     }
     private static String getRegexFromFileMask(String fileMask) {
-        String regexStr = fileMask.replace("?", ".{1}");
+        String regexStr = fileMask.replace(".", "[.]");
+        regexStr =  regexStr.replace("?", ".{1}");
         regexStr = regexStr.replace("*", ".*");
         return regexStr;
     }
