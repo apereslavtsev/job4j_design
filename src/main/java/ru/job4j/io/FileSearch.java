@@ -44,7 +44,7 @@ public class FileSearch implements FileVisitor<Path> {
         this.condition = condition;
     }
 
-    List<Path> getPaths() {
+    public List<Path> getPaths() {
         return paths;
     }
 }

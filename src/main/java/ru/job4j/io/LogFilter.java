@@ -39,7 +39,7 @@ public class LogFilter {
                 out.println(line);
             }
         } catch (IOException e) {
-            System.out.println("Ошибка при чтении данных из файла!");
+            System.out.println("Ошибка при записи данных в файл!");
             e.printStackTrace();
         }
     }
