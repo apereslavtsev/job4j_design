@@ -140,11 +140,24 @@
     String[] filesNames = file.list();
 
 17. Как проверить что файловая сущность является файлом или папкой?
+    File.isDirectory() isFile()
+    Path.isDirectory() isRegularFile()
+
 18. Как удалить файл?
+    file.delete()
+    Files.deleteIfExists()
+
 19. Как переместить файл?
+    Files.move(Paths.get("/foo.txt"), Paths.get("bar.txt"), StandardCopyOption.REPLACE_EXISTING);
+
 20. Как управлять аттрибутами файла?
 21. Как создать файл?
+    Files.createFile(file1);
+
+
 22. Как создать директорию?
+    Files.CreateDirectory
+
 23. Как записать в файл?
 24. Как прочитать данные из файла?
 25. Что такое сокет?
