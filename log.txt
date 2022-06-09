@@ -1,10 +1,29 @@
-0:0:0:0:0:0:0:1 - - [19/Feb/2020:15:21:18 +0300] "GET /items/ajax.html HTTP/1.1" 404 1113
-0:0:0:0:0:0:0:1 - - [19/Feb/2020:15:21:23 +0300] "GET /job4j.ru/profile HTTP/1.1" 302 -
-0:0:0:0:0:0:0:1 - - [19/Feb/2020:15:21:23 +0300] "GET /job4j.ru/profile/ HTTP/1.1" 404 1110
-0:0:0:0:0:0:0:1 - - [19/Feb/2020:15:21:34 +0300] "GET /job4j.ru/profileNew/ HTTP/1.1" 404 -
-0:0:0:0:0:0:0:1 - - [19/Feb/2020:15:21:48 +0300] "GET / HTTP/1.1" 200 11488
-0:0:0:0:0:0:0:1 - - [19/Feb/2020:15:21:49 +0300] "GET /404.png HTTP/1.1" 200 5103
-0:0:0:0:0:0:0:1 - - [19/Feb/2020:15:21:49 +0300] "GET /tomcat.css HTTP/1.1" 200 5931
-0:0:0:0:0:0:0:1 - - [19/Feb/2020:15:21:49 +0300] "GET /bg-nav.png HTTP/1.1" 200 1404
-0:0:0:0:0:0:0:1 - - [19/Feb/2020:15:21:49 +0300] "GET /bg-button.png HTTP/1.1" 200 713
-0:0:0:0:0:0:0:1 - - [19/Feb/2020:15:21:49 +0300] "GET /bg-middle.png HTTP/1.1" 200 4048
+C:\Users\apereslavtsev\jgit\job4j\job4j_design\.idea\checkstyleidea-libs\readme.txt
+C:\Users\apereslavtsev\jgit\job4j\job4j_design\404.txt
+C:\Users\apereslavtsev\jgit\job4j\job4j_design\answers.txt
+C:\Users\apereslavtsev\jgit\job4j\job4j_design\data\serverUnavailablePeriods.txt
+C:\Users\apereslavtsev\jgit\job4j\job4j_design\data\serverUnavailablePeriods2.txt
+C:\Users\apereslavtsev\jgit\job4j\job4j_design\even.txt
+C:\Users\apereslavtsev\jgit\job4j\job4j_design\log.txt
+C:\Users\apereslavtsev\jgit\job4j\job4j_design\target\surefire-reports\ru.job4j.AppTest.txt
+C:\Users\apereslavtsev\jgit\job4j\job4j_design\target\surefire-reports\ru.job4j.generics.RoleStoreTest.txt
+C:\Users\apereslavtsev\jgit\job4j\job4j_design\target\surefire-reports\ru.job4j.generics.UserStoreTest.txt
+C:\Users\apereslavtsev\jgit\job4j\job4j_design\target\surefire-reports\ru.job4j.io.AnalizyTest.txt
+C:\Users\apereslavtsev\jgit\job4j\job4j_design\target\surefire-reports\ru.job4j.io.ArgsNameTest.txt
+C:\Users\apereslavtsev\jgit\job4j\job4j_design\target\surefire-reports\ru.job4j.io.ConfigTest.txt
+C:\Users\apereslavtsev\jgit\job4j\job4j_design\target\surefire-reports\ru.job4j.io.CSVReaderTest.txt
+C:\Users\apereslavtsev\jgit\job4j\job4j_design\target\surefire-reports\ru.job4j.iterator.BackwardArrayItTest.txt
+C:\Users\apereslavtsev\jgit\job4j\job4j_design\target\surefire-reports\ru.job4j.iterator.EvenNumbersIteratorTest.txt
+C:\Users\apereslavtsev\jgit\job4j\job4j_design\target\surefire-reports\ru.job4j.iterator.FlatMapTest.txt
+C:\Users\apereslavtsev\jgit\job4j\job4j_design\target\surefire-reports\ru.job4j.iterator.ListUtilsTest.txt
+C:\Users\apereslavtsev\jgit\job4j\job4j_design\target\surefire-reports\ru.job4j.iterator.MatrixItTest.txt
+C:\Users\apereslavtsev\jgit\job4j\job4j_design\target\surefire-reports\ru.job4j.list.ForwardLinkedTest.txt
+C:\Users\apereslavtsev\jgit\job4j\job4j_design\target\surefire-reports\ru.job4j.list.SimpleArrayListTest.txt
+C:\Users\apereslavtsev\jgit\job4j\job4j_design\target\surefire-reports\ru.job4j.list.SimpleLinkedListTest.txt
+C:\Users\apereslavtsev\jgit\job4j\job4j_design\target\surefire-reports\ru.job4j.list.SimpleQueueTest.txt
+C:\Users\apereslavtsev\jgit\job4j\job4j_design\target\surefire-reports\ru.job4j.list.SimpleStackTest.txt
+C:\Users\apereslavtsev\jgit\job4j\job4j_design\target\surefire-reports\ru.job4j.map.SimpleMapTest.txt
+C:\Users\apereslavtsev\jgit\job4j\job4j_design\target\surefire-reports\ru.job4j.question.AnalyzeTest.txt
+C:\Users\apereslavtsev\jgit\job4j\job4j_design\target\surefire-reports\ru.job4j.set.SimpleSetTest.txt
+C:\Users\apereslavtsev\jgit\job4j\job4j_design\target\surefire-reports\ru.job4j.tree.SimpleTreeTest.txt
+C:\Users\apereslavtsev\jgit\job4j\job4j_design\test4.txt
