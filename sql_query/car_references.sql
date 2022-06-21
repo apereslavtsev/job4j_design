@@ -14,6 +14,16 @@ create table pts
     date date     
 );
 
+create table cars
+(
+    id serial primary key,
+    carname text,
+    wheelcount integer,
+    weight double precision,
+    color_id integer references colors(id),
+    pts_id integer references pts(id) unique
+);
+
 create table drivers
 (
 	id serial primary key,
@@ -29,9 +39,3 @@ create table car_drivers
     driver_id int references drivers(id)    
 );
 
-
-alter table cars
-    add column color_id integer references colors(id),
-    add column pts_id integer references pts(id) unique;
-	
-	
