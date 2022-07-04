@@ -6,7 +6,7 @@ create table departments(
 
 create table employees(
     id serial primary key,
-    name varchar(255)
+    name varchar(255),
 	department_id int references departments(id)
 );
 
@@ -78,7 +78,7 @@ on employees.department_id = departments.id;
 --teens
 create table teens(
     id serial primary key,
-    name varchar(255)
+    name varchar(255),
 	is_male BOOLEAN
 );
  
