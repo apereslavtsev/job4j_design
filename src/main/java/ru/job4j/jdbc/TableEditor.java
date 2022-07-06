@@ -1,9 +1,8 @@
 package ru.job4j.jdbc;
 
-import java.sql.Connection;
-import java.sql.DatabaseMetaData;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.sql.*;
 import java.util.Properties;
 import java.util.StringJoiner;
 
@@ -13,28 +12,53 @@ public class TableEditor implements AutoCloseable {
 
     private Properties properties;
 
-    public TableEditor(Properties properties) {
+    public TableEditor(Properties properties) throws Exception {
         this.properties = properties;
         initConnection();
     }
 
-    private void initConnection() {
-        connection = null;
+    private void initConnection() throws Exception {
+        Class.forName(properties.getProperty("sql.driverName"));
+        connection = DriverManager.getConnection(
+                properties.getProperty("sql.url"),
+                properties.getProperty("sql.login"),
+                properties.getProperty("sql.password"));
     }
 
-    public void createTable(String tableName) {
+    private void executeUpdate(String sqlText) throws Exception {
+        try (var statement = connection.createStatement()) {
+            statement.executeUpdate(sqlText);
+        }
     }
 
-    public void dropTable(String tableName) {
+    public void createTable(String tableName) throws Exception {
+        executeUpdate(String.format(
+                    "CREATE TABLE %s()", tableName
+            ));
     }
 
-    public void addColumn(String tableName, String columnName, String type) {
+    public void dropTable(String tableName) throws Exception {
+        executeUpdate(String.format(
+                "DROP TABLE %s", tableName
+        ));
     }
 
-    public void dropColumn(String tableName, String columnName) {
+    public void addColumn(String tableName, String columnName, String type) throws Exception {
+        executeUpdate(String.format(
+                "ALTER TABLE %s ADD COLUMN %s %s", tableName, columnName, type
+        ));
     }
 
-    public void renameColumn(String tableName, String columnName, String newColumnName) {
+    public void dropColumn(String tableName, String columnName) throws Exception {
+        executeUpdate(String.format(
+                "ALTER TABLE %s DROP COLUMN %s", tableName, columnName
+        ));
+    }
+
+    public void renameColumn(String tableName, String columnName, String newColumnName) throws Exception {
+        executeUpdate(String.format(
+                "ALTER TABLE %s RENAME COLUMN %s TO %s", tableName, columnName, newColumnName
+        ));
     }
 
 
@@ -56,11 +80,18 @@ public class TableEditor implements AutoCloseable {
         }
         return buffer.toString();
     }
-
     @Override
     public void close() throws Exception {
         if (connection != null) {
             connection.close();
         }
+    }
+
+    public static void main(String[] args) throws Exception {
+        Properties config = new Properties();
+        try (InputStream in = TableEditor.class.getClassLoader().getResourceAsStream("sql.properties")) {
+            config.load(in);
+        }
+        TableEditor tableEditor = new TableEditor(config);
     }
 }
