@@ -1,4 +1,4 @@
-package ru.job4j.spammer;
+package ru.job4j.jdbc;
 
 import java.io.*;
 import java.sql.Connection;
@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
+import java.util.stream.Collectors;
 
 public class ImportDB {
 
@@ -20,9 +21,10 @@ public class ImportDB {
     }
 
     public List<User> load() throws IOException {
-        List<User> users = new ArrayList<>();
+        List<User> users;
         try (BufferedReader rd = new BufferedReader(new FileReader(dump))) {
-            /* rd.lines().forEach(...); */
+             users = new ArrayList<>(rd.lines().map(s -> s.split(";"))
+                     .map(ar -> new User(ar[0], ar[1])).toList());
         }
         return users;
     }
@@ -35,7 +37,7 @@ public class ImportDB {
                 cfg.getProperty("jdbc.password")
         )) {
             for (User user : users) {
-                try (PreparedStatement ps = cnt.prepareStatement("insert into users ...")) {
+                try (PreparedStatement ps = cnt.prepareStatement("insert into spammers(name, email) values (?, ?)")) {
                     ps.setString(1, user.name);
                     ps.setString(2, user.email);
                     ps.execute();
