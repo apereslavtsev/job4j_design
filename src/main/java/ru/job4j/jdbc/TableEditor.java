@@ -60,9 +60,7 @@ public class TableEditor implements AutoCloseable {
                 "ALTER TABLE %s RENAME COLUMN %s TO %s", tableName, columnName, newColumnName
         ));
     }
-
-
-    public static String getTableScheme(Connection connection, String tableName) throws Exception {
+    public String getTableScheme(String tableName) throws Exception {
         var rowSeparator = "-".repeat(30).concat(System.lineSeparator());
         var header = String.format("%-15s|%-15s%n", "NAME", "TYPE");
         var buffer = new StringJoiner(rowSeparator, rowSeparator, rowSeparator);
@@ -93,5 +91,18 @@ public class TableEditor implements AutoCloseable {
             config.load(in);
         }
         TableEditor tableEditor = new TableEditor(config);
+        tableEditor.createTable("cars");
+        System.out.println(tableEditor.getTableScheme("cars"));
+
+        tableEditor.addColumn("cars", "carName", "text");
+        System.out.println(tableEditor.getTableScheme("cars"));
+
+        tableEditor.renameColumn("cars", "carName", "name");
+        System.out.println(tableEditor.getTableScheme("cars"));
+
+        tableEditor.dropColumn("cars", "name");
+        System.out.println(tableEditor.getTableScheme("cars"));
+
+        tableEditor.dropTable("cars");
     }
 }
