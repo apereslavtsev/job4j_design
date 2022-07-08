@@ -21,10 +21,22 @@ public class ImportDB {
     }
 
     public List<User> load() throws IOException {
-        List<User> users;
+        List<User> users = new ArrayList<>();
         try (BufferedReader rd = new BufferedReader(new FileReader(dump))) {
-             users = new ArrayList<>(rd.lines().map(s -> s.split(";"))
-                     .map(ar -> new User(ar[0], ar[1])).toList());
+             List<String[]> arList = rd.lines().
+                     map(s -> s.split(";", 2)).toList();
+
+            for (int i = 0; i < arList.size(); i++) {
+                String[] ar = arList.get(i);
+                if (ar.length != 2
+                        || ar[1].trim().isEmpty()) {
+                    throw new IllegalArgumentException("invalid arguments in file line:" + (i + 1));
+                } else {
+                    users.add(new User(
+                            ar[0].trim().isEmpty() ? ar[1] : ar[0],
+                            ar[1]));
+                }
+            }
         }
         return users;
     }
