@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
-import java.util.stream.Collectors;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class ImportDB {
 
@@ -23,20 +23,20 @@ public class ImportDB {
     public List<User> load() throws IOException {
         List<User> users = new ArrayList<>();
         try (BufferedReader rd = new BufferedReader(new FileReader(dump))) {
-             List<String[]> arList = rd.lines().
-                     map(s -> s.split(";", 2)).toList();
-
-            for (int i = 0; i < arList.size(); i++) {
-                String[] ar = arList.get(i);
-                if (ar.length != 2
-                        || ar[1].trim().isEmpty()) {
-                    throw new IllegalArgumentException("invalid arguments in file line:" + (i + 1));
-                } else {
+            AtomicInteger id = new AtomicInteger();
+            rd.lines().forEach(line -> {
+                id.getAndIncrement();
+                String[] ar = line.split(";", 2);
+                    if (ar.length != 2
+                            || ar[0].isBlank()
+                            || ar[1].isBlank()) {
+                        throw new IllegalArgumentException("invalid arguments in file line:" + id.get());
+                    }
                     users.add(new User(
-                            ar[0].trim().isEmpty() ? ar[1] : ar[0],
-                            ar[1]));
+                        ar[0],
+                        ar[1]));
                 }
-            }
+            );
         }
         return users;
     }
